@@ -42,17 +42,24 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/ic_lock.png
-    - assets/images/ic_mail.png
-    - assets/images/ic_shape.png
-    - assets/images/ic_user.png
-    - assets/images/logo_car_blue.png
-    - assets/images/logo_car_red.png
+    - ic_lock.png
+    - ic_mail.png
+    - ic_user.png
+    - ic_shape.png
+    - logo_car_red.png
+    - logo_car_blue.png
+    - ic_arrow_left.png
   fonts:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
         - asset: fonts/Montserrat-Bold.ttf
         - asset: fonts/Montserrat-Light.ttf
-          weight: 400
+    - family: SFProDisplay
+      fonts:
+        - asset: fonts/SFProDisplay-Regular.ttf
+        - asset: fonts/SFProDisplay-Medium.ttf
+        - asset: fonts/SFProDisplay-Light.ttf
+        - asset: fonts/SFProDisplay-Bold.ttf
+        - asset: fonts/SFProDisplay-Thin.ttf
     
