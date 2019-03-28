@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:taxi/src/resources/login_page.dart';
+import 'package:taxi/src/blocs/auth_bloc.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends InheritedWidget {
+  
+  final AuthBloc authBloc;
+  final Widget child;
+
+  MyApp(this.authBloc, this.child) :super(child: child);
+
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      theme: ThemeData(fontFamily: 'SFProDisplay'),
-      home :LoginPage(),
-    );
+  bool updateShouldNotify(InheritedWidget oldWidget) {
+    // TODO: implement updateShouldNotify
+    return false;
+  }
+
+  static MyApp of(BuildContext context){
+    return context.inheritFromWidgetOfExactType(MyApp);
   }
 }

@@ -1,5 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:taxi/src/app.dart';
+import 'package:taxi/src/controller/default_controller.dart';
+import 'package:taxi/src/resources/dialog/loading_dialog.dart';
+import 'package:taxi/src/resources/dialog/msg_dialog.dart';
+import 'package:taxi/src/resources/home_page.dart';
 import 'package:taxi/src/resources/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -8,6 +13,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  DefaultController defaultController = new DefaultController();
+  TextEditingController _userEmailController = new TextEditingController();
+  TextEditingController _userPassController = new TextEditingController();
+  FocusNode _emailFocus = FocusNode();
+  FocusNode _passFocus = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +47,12 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: TextField(
+                    controller: _userEmailController,
                     style: TextStyle(fontSize: 16, color: Color(0xff323643)),
+                    textInputAction: TextInputAction.next,
+                    focusNode: _emailFocus,
+                    onSubmitted: (term) => defaultController.fieldFocusChange(
+                        context, _emailFocus, _passFocus),
                     decoration: InputDecoration(
                         labelText: "Email",
                         labelStyle:
@@ -55,8 +70,11 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: TextField(
+                    controller: _userPassController,
                     style: TextStyle(fontSize: 16, color: Color(0xff323643)),
                     obscureText: true,
+                    focusNode: _passFocus,
+                    textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
                         labelText: "Password",
                         labelStyle:
@@ -88,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.infinity,
                     height: 52,
                     child: RaisedButton(
-                      onPressed: () {},
+                      onPressed: onSignInClicked,
                       child: Text(
                         "Login",
                         style: TextStyle(color: Colors.white, fontSize: 16),
@@ -126,5 +144,21 @@ class _LoginPageState extends State<LoginPage> {
             ),
           )),
     );
+  }
+
+  void onSignInClicked() {
+    String email = _userEmailController.text;
+    String pass = _userPassController.text;
+
+    var authBloc = MyApp.of(context).authBloc;
+    LoadingDialog.showLoadingDialog(context, "Loading...");
+    authBloc.signIn(email, pass, () {
+      LoadingDialog.hideLoadingDialog(context);
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => HomePage()));
+    }, (msg) {
+      LoadingDialog.hideLoadingDialog(context);
+      MsgDialog.showMsgDialog(context, "Sign In", msg);
+    });
   }
 }
