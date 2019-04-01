@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   firebase_auth:
   firebase_database:
+  google_maps_flutter:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -49,6 +50,21 @@ flutter:
     - logo_car_red.png
     - logo_car_blue.png
     - ic_arrow_left.png
+    - ic_location_black.png
+    - ic_map_nav.png
+    - ic_menu.png
+    - ic_menu_help.png
+    - ic_menu_history.png
+    - ic_menu_logout.png
+    - ic_menu_notify.png
+    - ic_menu_percent.png
+    - ic_menu_user.png
+    - ic_notify.png
+    - ic_remove_x.png
+    - ic_phone.png
+    - ic_line.png
+
+
   fonts:
     - family: Montserrat
       fonts:
