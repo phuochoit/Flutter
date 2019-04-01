@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: Text("WhatsApp"),
+        title: Center(child: Text("WhatsApp")),
         elevation: 0.7,
         bottom: new TabBar(
           controller: _tabController,
