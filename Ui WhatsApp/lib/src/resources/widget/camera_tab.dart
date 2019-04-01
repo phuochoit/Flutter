@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CameraTab extends StatefulWidget {
-  @override
-  _CameraTabState createState() => _CameraTabState();
-}
-
-class _CameraTabState extends State<CameraTab> {
+class CameraTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("1"),
+      child: Text("CameraTab"),
     );
   }
 }

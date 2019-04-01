@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
-class StatusTab extends StatefulWidget {
-  @override
-  _StatusTabState createState() => _StatusTabState();
-}
-
-class _StatusTabState extends State<StatusTab> {
+class StatusTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("3"),
+      child: Text("StatusTab"),
     );
   }
 }

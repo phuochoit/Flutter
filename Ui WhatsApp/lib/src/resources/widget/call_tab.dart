@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CallTab extends StatefulWidget {
-  @override
-  _CallTabState createState() => _CallTabState();
-}
-
-class _CallTabState extends State<CallTab> {
+class CallTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("4"),
+      child: Text("CallTab"),
     );
   }
 }

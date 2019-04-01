@@ -28,7 +28,9 @@ class _HomePageState extends State<HomePage>
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            new Tab(icon: new Icon(Icons.camera_alt)),
+            new Tab(
+              icon: new Icon(Icons.camera_alt),
+            ),
             new Tab(
               text: "CHATS",
             ),
@@ -40,6 +42,13 @@ class _HomePageState extends State<HomePage>
             ),
           ],
         ),
+        actions: <Widget>[
+          Icon(Icons.search),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+          ),
+          Icon(Icons.more_vert)
+        ],
       ),
       body: TabBarView(
         controller: _tabController,
@@ -50,9 +59,16 @@ class _HomePageState extends State<HomePage>
           CallTab(),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).accentColor,
+        child: Icon(
+          Icons.message,
+          color: Colors.white,
+        ),
+        onPressed: () => print("Open chat"),
+      ),
     );
   }
 }
 
-
-// https://youtu.be/2Tyrofn6zPg?t=863
+// https://youtu.be/2Tyrofn6zPg?t=2058
