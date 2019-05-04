@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-
+//https://youtu.be/32RI0qUnTzQ?list=PLmnT6naTGy2SC82FMSCrvZNogg5T1H7iF&t=52
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
