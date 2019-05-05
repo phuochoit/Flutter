@@ -1,5 +1,7 @@
+import 'package:e_commerce/componets/home_categoris_listview.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+
 //https://youtu.be/32RI0qUnTzQ?list=PLmnT6naTGy2SC82FMSCrvZNogg5T1H7iF&t=52
 void main() => runApp(MyApp());
 
@@ -22,12 +24,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Widget image_carousel = Container(
-    height: 200.0,
+    height: 180.0,
     width: double.infinity,
     child: Carousel(
       boxFit: BoxFit.cover,
       images: [
-        AssetImage("assets/images/c1.jpg"),
         AssetImage("assets/images/m1.jpeg"),
         AssetImage("assets/images/m2.jpg"),
         AssetImage("assets/images/w1.jpeg"),
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         AssetImage("assets/images/w4.jpeg"),
       ],
       autoplay: true,
-      dotSize: 4.0,
+      dotSize: 3.0,
       indicatorBgPadding: 6.0,
       animationCurve: Curves.fastOutSlowIn,
       animationDuration: Duration(milliseconds: 1000),
@@ -139,10 +140,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          children: <Widget>[
-            image_carousel,
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              image_carousel,
+              HomeCategioris()
+            ],
+          ),
         ),
       ),
     );
