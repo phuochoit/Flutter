@@ -1,4 +1,4 @@
-name: taxi
+name: ndh_flutter_03
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -19,14 +19,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth:
-  firebase_database:
-  google_maps_flutter:
-  http:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  english_words:
 
 dev_dependencies:
   flutter_test:
@@ -43,42 +40,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets:
-    - ic_lock.png
-    - ic_mail.png
-    - ic_user.png
-    - ic_shape.png
-    - logo_car_red.png
-    - logo_car_blue.png
-    - ic_arrow_left.png
-    - ic_location_black.png
-    - ic_map_nav.png
-    - ic_menu.png
-    - ic_menu_help.png
-    - ic_menu_history.png
-    - ic_menu_logout.png
-    - ic_menu_notify.png
-    - ic_menu_percent.png
-    - ic_menu_user.png
-    - ic_notify.png
-    - ic_remove_x.png
-    - ic_phone.png
-    - ic_line.png
-
-
-  fonts:
-    - family: Montserrat
-      fonts:
-        - asset: fonts/Montserrat-Regular.ttf
-        - asset: fonts/Montserrat-Bold.ttf
-        - asset: fonts/Montserrat-Light.ttf
-    - family: SFProDisplay
-      fonts:
-        - asset: fonts/SFProDisplay-Regular.ttf
-        - asset: fonts/SFProDisplay-Medium.ttf
-        - asset: fonts/SFProDisplay-Light.ttf
-        - asset: fonts/SFProDisplay-Bold.ttf
-        - asset: fonts/SFProDisplay-Thin.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

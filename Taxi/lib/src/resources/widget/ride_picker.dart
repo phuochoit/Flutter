@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:taxi/src/model/place_items_res.dart';
 import 'package:taxi/src/resources/ride_picker_page.dart';
 
 class RidePicker extends StatefulWidget {
+  final Function(PlaceItemRes, bool) onSelected;
+  RidePicker(this.onSelected);
   @override
   _RidePickerState createState() => _RidePickerState();
 }
 
 class _RidePickerState extends State<RidePicker> {
+  PlaceItemRes fromAddress;
+  PlaceItemRes toAddress;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,9 +39,14 @@ class _RidePickerState extends State<RidePicker> {
                 height: 50,
                 child: FlatButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context)=> RidePickerPage())
-                    );
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RidePickerPage(
+                                fromAddress == null ? "" : fromAddress.name,
+                                (place, isFrom) {
+                              widget.onSelected(place, isFrom);
+                              fromAddress = place;
+                              setState(() {});
+                            }, true)));
                   },
                   child: SizedBox(
                     width: double.infinity,
@@ -54,7 +65,8 @@ class _RidePickerState extends State<RidePicker> {
                         Padding(
                           padding: EdgeInsets.only(left: 40, right: 40),
                           child: Text(
-                            "16/66 Xuân Diệu, thành phố huế",
+                            fromAddress == null ? "From" : fromAddress.name,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontSize: 16, color: Color(0xff323643)),
                           ),
@@ -120,4 +132,5 @@ class _RidePickerState extends State<RidePicker> {
       ),
     );
   }
+  
 }

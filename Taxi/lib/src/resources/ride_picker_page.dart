@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:taxi/src/blocs/place_bloc.dart';
+import 'package:taxi/src/model/place_items_res.dart';
 
 class RidePickerPage extends StatefulWidget {
+  final bool _isFormAddress;
+  final String selectedAddress;
+  final Function(PlaceItemRes, bool) onSelected;
+
+  RidePickerPage(this.selectedAddress, this.onSelected, this._isFormAddress);
+
   @override
   _RidePickerPageState createState() => _RidePickerPageState();
 }
 
 class _RidePickerPageState extends State<RidePickerPage> {
+  PlaceBloc placeBloc = new PlaceBloc();
   TextEditingController _ridePickerController = new TextEditingController();
+
+  void initState(){
+    _ridePickerController = TextEditingController(text: widget.selectedAddress);
+    super.initState();
+  }
+  @override
+  void dispose() {
+    placeBloc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +75,9 @@ class _RidePickerPageState extends State<RidePickerPage> {
                         child: TextField(
                           controller: _ridePickerController,
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (str) {},
+                          onSubmitted: (str) {
+                            placeBloc.searchPlace(str);
+                          },
                           style: TextStyle(fontSize: 16.0, color: Colors.black),
                         ),
                       )
@@ -64,6 +85,42 @@ class _RidePickerPageState extends State<RidePickerPage> {
                   ),
                 ),
               ),
+              Container(
+                  padding: EdgeInsets.only(top: 20),
+                  child: StreamBuilder(
+                      stream: placeBloc.placeStream,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot.data.toString());
+                          if (snapshot.data == "start") {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          List<PlaceItemRes> places = snapshot.data;
+                          return ListView.separated(
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: Text(places.elementAt(index).name),
+                                  subtitle:
+                                      Text(places.elementAt(index).address),
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    var onSelected = onSelected;
+                                    Widget.onSelected(places.elementAt(index), widget._isFormAddress);
+                                  },
+                                );
+                              },
+                              separatorBuilder: (context, index) => Divider(
+                                    height: 1,
+                                    color: Color(0xfff5f5f5),
+                                  ),
+                              itemCount: places.length);
+                        } else {
+                          return Container();
+                        }
+                      })),
             ],
           ),
         ),
