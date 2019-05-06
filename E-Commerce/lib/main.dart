@@ -1,4 +1,5 @@
 import 'package:e_commerce/componets/home_categoris_listview.dart';
+import 'package:e_commerce/componets/products.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
@@ -145,7 +146,16 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               image_carousel,
-              HomeCategioris()
+              HomeCategioris(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Recent produtcs"),
+              ), 
+
+              Container(
+                height: 320,
+                child: Producst(),
+              )
             ],
           ),
         ),
