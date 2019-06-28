@@ -1,4 +1,4 @@
-import 'package:apijson/Home.dart';
+import 'package:apimap/Home.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -10,10 +10,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        backgroundColor: Colors.white
       ),
       home: Home(),
     );
   }
 }
-
