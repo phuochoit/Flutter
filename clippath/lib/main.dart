@@ -35,6 +35,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double baseHeight = 640;
+  double screenAwareSize(double size, BuildContext context) {
+    return size * MediaQuery.of(context).size.height / baseHeight;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
