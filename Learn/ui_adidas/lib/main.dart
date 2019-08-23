@@ -155,8 +155,7 @@ class ProductScreenBottomPart extends StatefulWidget {
 
 class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
   bool isExpanded = false;
-  int currentIndexSize, _counter = 0;
-//  int  = 0;
+  int currentIndexSize, _counter, currentColorIndex = 0;
 
   void _increase() {
     setState(() {
@@ -180,6 +179,19 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
     setState(() {
       currentIndexSize = index;
     });
+  }
+
+  List<Widget> colorSelector() {
+    List<Widget> colorItemList = new List();
+    for (var i = 0; i < colors.length; i++) {
+      colorItemList
+          .add(colorItem(colors[i], i == currentColorIndex, context, () {
+        setState(() {
+          currentColorIndex = i;
+        });
+      }));
+    }
+    return colorItemList;
   }
 
   @override
@@ -266,17 +278,16 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                         onTap: () {
                           _setIndex(index);
                         },
-                        child: sizeItem(item,
-                            index == currentIndexSize ? true : false, context),
+                        child:
+                            sizeItem(item, index == currentIndexSize, context),
                       );
                     }).toList(),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    left: screenAwareSize(20.0, context),
-                    right: screenAwareSize(20.0, context)
-                  ),
+                      left: screenAwareSize(20.0, context),
+                      right: screenAwareSize(20.0, context)),
                   child: Container(
                     width: screenAwareSize(100.0, context),
                     height: screenAwareSize(30.0, context),
@@ -333,9 +344,77 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
               ],
             ),
           ),
-          Padding(
-              padding: EdgeInsets.only(left: screenAwareSize(20.0, context)),
+          SizedBox(
+            height: 8.0,
           ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: screenAwareSize(18.0, context),
+            ),
+            child: Text(
+              "Select Color",
+              style: title(10, context),
+            ),
+          ),
+          SizedBox(
+            height: screenAwareSize(8.0, context),
+          ),
+          Container(
+            width: double.infinity,
+            height: screenAwareSize(34.0, context),
+            margin: EdgeInsets.only(left: screenAwareSize(20.0, context)),
+            child: Row(
+              children: colorSelector(),
+            ),
+          ),
+          SizedBox(
+            height: screenAwareSize(6.0, context),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: screenAwareSize(18.0, context)),
+            child: Text(
+              "Price",
+              style: title(10.0, context),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            height: screenAwareSize(30, context),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(left: screenAwareSize(22.0, context)),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 10.0,
+                            left: screenAwareSize(18.0, context)),
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              "\$",
+                              style: descStyle(Colors.white, 26,
+                                  "Montserrat-Medium", context),
+                            ),
+                            SizedBox(
+                              width: screenAwareSize(2.0, context),
+                            ),
+                            Text(
+                              "80",
+                              style: descStyle(Colors.white, 35,
+                                  "Montserrat-Medium", context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -369,6 +448,57 @@ Widget sizeItem(String size, bool isSelected, BuildContext context) {
   );
 }
 
+Widget colorItem(
+    Color color, bool isSelected, BuildContext context, VoidCallback _ontab) {
+  return GestureDetector(
+    onTap: _ontab,
+    child: Padding(
+      padding: EdgeInsets.only(left: screenAwareSize(10.0, context)),
+      child: Container(
+        width: screenAwareSize(30.0, context),
+        height: screenAwareSize(30.0, context),
+        decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(5.0),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(.8),
+                        blurRadius: 10.0,
+                        offset: Offset(0.0, 10.0))
+                  ]
+                : []),
+        child: ClipPath(
+          clipper: Mclipper(),
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: color,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+class Mclipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = new Path();
+    path.lineTo(0.0, size.height);
+    path.lineTo(size.width * 0.2, size.height);
+    path.lineTo(size.width, size.height * 0.2);
+    path.lineTo(size.width, 0.0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
+
 Widget divider() {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
@@ -378,6 +508,5 @@ Widget divider() {
     ),
   );
 }
-
 
 // https://youtu.be/dMLreUXpSQ0?t=560
